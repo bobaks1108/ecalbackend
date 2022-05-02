@@ -1,8 +1,12 @@
 package com.bguinn.ecal.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.bguinn.ecal.exception.ResourceNotFoundException;
@@ -67,6 +71,12 @@ public class EventServiceImpl implements EventService {
 		
 		eventRepository.deleteById(id);
 		
+	}
+
+
+	@Override
+	public List<Event> findAllWithStartDateTimeBefore(Date parse) {
+		return eventRepository.findAllWithStartDateTimeBefore(parse);
 	}
 	
 
