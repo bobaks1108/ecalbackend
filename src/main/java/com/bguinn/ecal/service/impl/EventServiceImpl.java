@@ -72,11 +72,23 @@ public class EventServiceImpl implements EventService {
 		eventRepository.deleteById(id);
 		
 	}
+	
+	@Override
+	public void deleteAll() {
+		
+		eventRepository.deleteAll();
+		
+	}
 
 
 	@Override
-	public List<Event> findAllWithStartDateTimeBefore(Date parse) {
-		return eventRepository.findAllWithStartDateTimeBefore(parse);
+	public List<Event> findAllWithStartDateTimeOnOrBefore(Date parse) {
+		return eventRepository.findAllWithStartDateTimeOnOrBefore(parse);
+	}
+	
+	@Override
+	public List<Event> findByName(String filterText) {
+		return eventRepository.findByName(filterText);
 	}
 	
 

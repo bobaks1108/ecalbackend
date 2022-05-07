@@ -28,12 +28,22 @@ public class Event {
 	private String name;
 	
 	@Column(name="start_date")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'")
 	private Date startDate;
 	
 	@Column(name="end_date")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'")
 	private Date endDate;
+	
+    public Event() {
+		super();
+	}
+
+	private Event(EventBuilder builder) {
+		this.name = builder.name;
+		this.startDate = builder.startDate;
+		this.endDate = builder.endDate;
+	}
 
 	public long getId() {
 		return id;
@@ -67,5 +77,40 @@ public class Event {
 		this.endDate = endDate;
 	}
 
+
+	public static class EventBuilder
+	{
+		private String name;
+		private Date startDate;
+		private Date endDate;
+
+		public EventBuilder(String name) {
+			this.name = name;
+		}
+		
+		public EventBuilder startDate(Date startDate) {
+			this.startDate = startDate;
+			return this;
+		}
+		
+		public EventBuilder endDate(Date endDate) {
+			this.endDate = endDate;
+			return this;
+		}
+
+		//Return the finally constructed Event  object
+		public Event build() {
+			Event event =  new Event(this);
+			validateEventObject(event);
+			return event;
+		} 
+		
+		private void validateEventObject(Event event) {
+			//Do some basic validations to check
+			//if user object does not break any assumption of system
+		}
+
+	}
+	
 
 }

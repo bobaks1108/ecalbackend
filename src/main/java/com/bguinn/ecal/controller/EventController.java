@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bguinn.ecal.model.Event;
@@ -68,6 +69,12 @@ public class EventController {
 	     Map<String, Boolean> response = new HashMap<>();
 	     response.put("deleted", Boolean.TRUE);
 	     return response;
+	}
+	
+
+	@GetMapping("/search")
+	public List<Event> findByName(@RequestParam(value = "name", defaultValue = "") String name) {
+		return eventService.findByName(name);
 	}
 	
 	

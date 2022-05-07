@@ -12,6 +12,8 @@ public interface EventService {
 	Event getEventById(long id);
 	Event updateEvent(Event event, long id);
 	void deleteEvent(long id);
-	List<Event> findAllWithStartDateTimeBefore(Date parse);
+	List<Event> findAllWithStartDateTimeOnOrBefore(Date parse);
+	void deleteAll();
+	List<Event> findByName(String string);
 
 }
