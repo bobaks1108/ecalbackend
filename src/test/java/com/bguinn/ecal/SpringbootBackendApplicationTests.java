@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -68,13 +69,13 @@ class SpringbootBackendApplicationTests {
 		
 		// ZZZZ is the time zone 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZ");
-        
+
         // +0000 means UTC
-        Date date1 = sdf.parse("2022-04-06T00:00:00+0000");
+        Date date1 = sdf.parse("2022-04-20T00:00:00+0000");
 		
-		Date date2 = sdf.parse("2022-04-04T00:00:00+0000");
+		Date date2 = sdf.parse("2022-05-20T00:00:00+0000");
 		
-		Date date3 = sdf.parse("2022-04-03T00:00:00+0000");
+		Date date3 = sdf.parse("2022-12-01T00:00:00+0000");
 		
 		
 		// example with milliseconds
@@ -83,17 +84,17 @@ class SpringbootBackendApplicationTests {
 		
 		
 		// given - precondition or setup
-        Event event1 = new Event.EventBuilder("event1")
+        Event event1 = new Event.EventBuilder("event1 "+date1.toString())
                 .startDate(date1)
                 .endDate(date1)
                 .build();
         
-        Event event2 = new Event.EventBuilder("event2")
+        Event event2 = new Event.EventBuilder("event2 "+date2.toString())
                 .startDate(date2)
                 .endDate(date2)
                 .build();
         
-        Event event3 = new Event.EventBuilder("event3")
+        Event event3 = new Event.EventBuilder("event3  "+date3.toString())
                 .startDate(date3)
                 .endDate(date3)
                 .build();
@@ -149,13 +150,13 @@ class SpringbootBackendApplicationTests {
 		
 		
         List<Event> result = eventService.findAllWithStartDateTimeOnOrBefore(
-          new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2022-04-04 00:00"));
+          new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2022-05-30 00:00"));
 
-        assertEquals(2, result.size());
+        assertEquals(1, result.size());
         
         assertTrue(result.stream()
           .map(Event::getName)
-          .allMatch(name -> Arrays.asList("event2", "event3").contains(name.toString())));
+          .allMatch(name -> Arrays.asList("event2 "+date2.toString()).contains(name.toString())));
         
     }
 
@@ -171,11 +172,11 @@ class SpringbootBackendApplicationTests {
 	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZ");
 	    
 	    // +0000 means UTC
-	    Date date1 = sdf.parse("2022-04-06T00:00:00+0000");
+                Date date1 = sdf.parse("2022-04-20T00:00:00+0000");
 		
-		Date date2 = sdf.parse("2022-04-04T00:00:00+0000");
+		Date date2 = sdf.parse("2022-05-25T00:00:00+0000");
 		
-		Date date3 = sdf.parse("2022-04-03T00:00:00+0000");
+		Date date3 = sdf.parse("2022-12-01T00:00:00+0000");
 		
 		
 		// example with milliseconds
@@ -184,20 +185,21 @@ class SpringbootBackendApplicationTests {
 		
 		
 		// given - precondition or setup
-	    Event event1 = new Event.EventBuilder("event1")
-	            .startDate(date1)
-	            .endDate(date1)
-	            .build();
-	    
-	    Event event2 = new Event.EventBuilder("event2")
-	            .startDate(date2)
-	            .endDate(date2)
-	            .build();
-	    
-	    Event event3 = new Event.EventBuilder("event3")
-	            .startDate(date3)
-	            .endDate(date3)
-	            .build();
+        Event event1 = new Event.EventBuilder("event1 "+date1.toString())
+                .startDate(date1)
+                .endDate(date1)
+                .build();
+        
+        Event event2 = new Event.EventBuilder("event2 "+date2.toString())
+                .startDate(date2)
+                .endDate(date2)
+                .build();
+        
+        Event event3 = new Event.EventBuilder("event3  "+date3.toString())
+                .startDate(date3)
+                .endDate(date3)
+                .build();
+        
 	    
 	    // when - action or behaviour that we are going test
 	    ResultActions response = mockMvc.perform(post("/api/events")
@@ -226,13 +228,13 @@ class SpringbootBackendApplicationTests {
 	                    is(event1.getEndDate().toInstant().toString())));
 		
 	    
-	    List<Event> result1 = eventService.findByName("2");
+	    List<Event> result1 = eventService.findByName("event2");
 	    
 	    assertEquals(1, result1.size());
 	    
 	    assertTrue(result1.stream()
 	            .map(Event::getName)
-	            .allMatch(name -> Arrays.asList("event2").contains(name.toString())));
+	            .allMatch(name -> Arrays.asList("event2 "+date2.toString()).contains(name.toString())));
 	    
 		}
 

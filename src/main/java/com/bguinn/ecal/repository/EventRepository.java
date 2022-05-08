@@ -12,7 +12,7 @@ import com.bguinn.ecal.model.Event;
 public interface EventRepository extends JpaRepository<Event, Long> {
 
 	// retrieves events created before a given date time
-	@Query("select a from Event a where startDate <= :filterStartDateTime")
+	@Query("select a from Event a where startDate <= :filterStartDateTime AND startDate >= CURDATE()")
 	List<Event> findAllWithStartDateTimeOnOrBefore(
 			@Param("filterStartDateTime") Date filterStartDateTime);
 	

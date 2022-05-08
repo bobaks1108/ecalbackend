@@ -1,8 +1,14 @@
 package com.bguinn.ecal.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -76,6 +82,42 @@ public class EventController {
 	public List<Event> findByName(@RequestParam(value = "name", defaultValue = "") String name) {
 		return eventService.findByName(name);
 	}
+	
+	//findAllWithStartDateTimeOnOrBefore
+	// build get all events REST API
+	@GetMapping("/upcoming")
+	public List<Event> findAllInTheNextNoOfDays(@RequestParam(value = "noOfDays", defaultValue = "0") String noOfDays) {
+		
+		System.out.println("noOfDays:"+noOfDays);
+		
+		int noOfDaysInt;
+		
+        try{
+            noOfDaysInt = Integer.parseInt(noOfDays);
+            System.out.println(noOfDays); // output = 25
+        }
+        catch (NumberFormatException ex){
+            ex.printStackTrace();
+        }
+        
+
+		Date currentDate = new Date();
+
+	        // convert date to calendar
+	        Calendar c = Calendar.getInstance();
+	        c.setTime(currentDate);
+
+	        // manipulate date
+	        c.add(Calendar.DATE, noOfDaysInt); //same with c.add(Calendar.DAY_OF_MONTH, 1);
+
+	        // convert calendar to date
+	        Date currentDatePlus = c.getTime();
+	        
+	        System.out.println(currentDatePlus); 
+
+		
+		return eventService.findAllWithStartDateTimeOnOrBefore(currentDatePlus);
+	};
 	
 	
 //	Original below caused 
