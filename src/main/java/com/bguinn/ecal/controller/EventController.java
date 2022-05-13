@@ -2,6 +2,7 @@ package com.bguinn.ecal.controller;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
@@ -90,7 +91,7 @@ public class EventController {
 		
 		System.out.println("noOfDays:"+noOfDays);
 		
-		int noOfDaysInt;
+		int noOfDaysInt=0;
 		
         try{
             noOfDaysInt = Integer.parseInt(noOfDays);
@@ -99,23 +100,13 @@ public class EventController {
         catch (NumberFormatException ex){
             ex.printStackTrace();
         }
-        
 
-		Date currentDate = new Date();
+        ZonedDateTime now = ZonedDateTime.now();
 
-	        // convert date to calendar
-	        Calendar c = Calendar.getInstance();
-	        c.setTime(currentDate);
-
-	        // manipulate date
-	        c.add(Calendar.DATE, noOfDaysInt); //same with c.add(Calendar.DAY_OF_MONTH, 1);
-
-	        // convert calendar to date
-	        Date currentDatePlus = c.getTime();
-	        
-	        System.out.println(currentDatePlus); 
-
+		ZonedDateTime currentDatePlus = now.plusHours(noOfDaysInt*24);
 		
+		System.out.println(currentDatePlus); 
+	
 		return eventService.findAllWithStartDateTimeOnOrBefore(currentDatePlus);
 	};
 	

@@ -1,5 +1,6 @@
 package com.bguinn.ecal.service;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface EventService {
 	Event getEventById(long id);
 	Event updateEvent(Event event, long id);
 	void deleteEvent(long id);
-	List<Event> findAllWithStartDateTimeOnOrBefore(Date parse);
+	List<Event> findAllWithStartDateTimeOnOrBefore(ZonedDateTime parse);
 	void deleteAll();
 	List<Event> findByName(String string);
 
