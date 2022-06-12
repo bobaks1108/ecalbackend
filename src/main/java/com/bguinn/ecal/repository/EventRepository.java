@@ -17,7 +17,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 	List<Event> findAllWithStartDateTimeOnOrBefore(
 			@Param("filterStartDateTime") ZonedDateTime filterStartDateTime);
 	
-	@Query("select e from Event e where lower(e.name) like CONCAT('%', lower(:filterText), '%')")
+	@Query("select e from Event e where lower(e.eventName) like CONCAT('%', lower(:filterText), '%')")
 	List<Event> findByName(
 			@Param("filterText") String filterText);
 	

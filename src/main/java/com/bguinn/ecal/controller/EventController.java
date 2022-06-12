@@ -80,8 +80,8 @@ public class EventController {
 	
 
 	@GetMapping("/search")
-	public List<Event> findByName(@RequestParam(value = "name", defaultValue = "") String name) {
-		return eventService.findByName(name);
+	public List<Event> findByName(@RequestParam(value = "eventName", defaultValue = "") String eventName) {
+		return eventService.findByName(eventName);
 	}
 	
 	//findAllWithStartDateTimeOnOrBefore

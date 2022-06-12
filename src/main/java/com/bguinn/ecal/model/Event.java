@@ -26,7 +26,7 @@ public class Event {
 	private long id;
 	
 	@Column(name="name")
-	private String name;
+	private String eventName;
 	
 	@Column(name="start_date")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ssZZZZZ")
@@ -41,7 +41,7 @@ public class Event {
 	}
 
 	private Event(EventBuilder builder) {
-		this.name = builder.name;
+		this.eventName = builder.eventName;
 		this.startDate = builder.startDate;
 		this.endDate = builder.endDate;
 	}
@@ -54,12 +54,12 @@ public class Event {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getEventName() {
+		return eventName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
 	}
 
 	public ZonedDateTime getStartDate() {
@@ -81,12 +81,12 @@ public class Event {
 
 	public static class EventBuilder
 	{
-		private String name;
+		private String eventName;
 		private ZonedDateTime startDate;
 		private ZonedDateTime endDate;
 
-		public EventBuilder(String name) {
-			this.name = name;
+		public EventBuilder(String eventName) {
+			this.eventName = eventName;
 		}
 		
 		public EventBuilder startDate(ZonedDateTime startDate) {

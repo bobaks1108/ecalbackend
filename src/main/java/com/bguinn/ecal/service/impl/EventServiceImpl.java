@@ -52,7 +52,7 @@ public class EventServiceImpl implements EventService {
 		Event existingEvent =  eventRepository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundException("Event", "Id", id));
 		
-		existingEvent.setName(event.getName());
+		existingEvent.setEventName(event.getEventName());
 		existingEvent.setStartDate(event.getStartDate());
 		existingEvent.setEndDate(event.getEndDate());
 		

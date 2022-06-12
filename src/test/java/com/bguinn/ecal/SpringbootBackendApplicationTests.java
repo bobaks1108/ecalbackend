@@ -127,8 +127,8 @@ class SpringbootBackendApplicationTests {
 		
         response.andDo(print()).
         andExpect(status().isCreated())
-        .andExpect(jsonPath("$.name",
-                is(event.getName())))
+        .andExpect(jsonPath("$.eventName",
+                is(event.getEventName())))
         .andExpect(jsonPath("$.startDate",
                 is(event.getStartDate().truncatedTo(ChronoUnit.SECONDS).toString())))
         .andExpect(jsonPath("$.endDate",
@@ -179,8 +179,8 @@ class SpringbootBackendApplicationTests {
         assertEquals(1, result.size());
         
         assertTrue(result.stream()
-          .map(Event::getName)
-          .allMatch(name -> Arrays.asList("Event1").contains(name.toString())));
+          .map(Event::getEventName)
+          .allMatch(eventName -> Arrays.asList("Event1").contains(eventName.toString())));
 
 	}
 	
@@ -211,8 +211,8 @@ class SpringbootBackendApplicationTests {
 		assertEquals(1, result1.size());
 		
 		assertTrue(result1.stream()
-		        .map(Event::getName)
-		        .allMatch(name -> Arrays.asList("Event2").contains(name.toString())));
+		        .map(Event::getEventName)
+		        .allMatch(eventName -> Arrays.asList("Event2").contains(eventName.toString())));
 		
 	}
 
