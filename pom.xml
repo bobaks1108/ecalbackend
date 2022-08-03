@@ -8,14 +8,31 @@
 		<version>2.6.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>net.javaguides</groupId>
+	<groupId>com.bguinn.ecal</groupId>
 	<artifactId>springboot-backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>springboot-backend</name>
-	<description>Spring Boot RESTful web services</description>
+	<version>0.0.2-SNAPSHOT</version>
+	<name>ecal-springboot-backend</name>
+	<description>Ecal Spring Boot RESTful web services</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>11</java.version>
 	</properties>
+	<profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <activatedProperties>dev</activatedProperties>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <activatedProperties>prod</activatedProperties>
+            </properties>
+        </profile>
+    </profiles>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -45,6 +62,11 @@
     		<groupId>com.fasterxml.jackson.datatype</groupId>
     		<artifactId>jackson-datatype-jsr310</artifactId>
     		<version>2.6.0</version>
+		</dependency>
+		<dependency>
+		  <groupId>junit</groupId>
+		  <artifactId>junit</artifactId>
+		  <version>4.12</version>
 		</dependency>
 	</dependencies>
 
