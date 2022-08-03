@@ -21,8 +21,4 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 	List<Event> findByName(
 			@Param("filterText") String filterText);
 	
-//    @RestResource(path = "name", rel="name")
-//    @Query("from Hero h where lower(h.name) like CONCAT('%', lower(:contains), '%')")
-//    public Iterable<Hero> findByName(@Param("contains") String name);  
-
 }

@@ -40,26 +40,25 @@ public class EventController {
 	}
 	
 
-    // build create event REST API
+    // create event REST API
 	@PostMapping()
 	public ResponseEntity<Event> saveEvent(@RequestBody Event event) {
 		return new ResponseEntity<Event>(eventService.saveEvent(event), HttpStatus.CREATED);	
 	}
 	
-	// build get all events REST API
+	// get all events REST API
 	@GetMapping
 	public List<Event> getAllEvents() {
 		return eventService.getAllEvents();
 	};
 	
-	// build get event by id REST API
-	// http://localhost:8080/api/events/1
+	// get event by id REST API
 	@GetMapping("{id}")
 	public ResponseEntity<Event> getEventById(@PathVariable("id") long id) {
 		return new ResponseEntity<Event>(eventService.getEventById(id), HttpStatus.OK);
 	}
 	
-	// Build update event Rest api
+	// update event Rest api
 	@PutMapping("{id}")
 	public ResponseEntity<Event> updateEvent(@PathVariable("id") long id
 											,@RequestBody Event event) {
@@ -67,9 +66,7 @@ public class EventController {
 	
 	}
 	
-	
-	// From https://www.sourcecodeexamples.net/2019/10/deletemapping-spring-boot-example.html
-	// Build delete event Rest api
+	// delete event Rest api
 	@DeleteMapping("{id}")
 	public Map<String, Boolean> deleteEvent(@PathVariable("id") long id) {
 		
@@ -86,12 +83,10 @@ public class EventController {
 		return eventService.findByName(eventName);
 	}
 	
-	//findAllWithStartDateTimeOnOrBefore
+	// find all events with start date on or before
 	// build get all events REST API
 	@GetMapping("/upcoming")
 	public List<Event> findAllInTheNextNoOfDays(@RequestParam(value = "noOfDays", defaultValue = "0") String noOfDays) {
-		
-		System.out.println("noOfDays:"+noOfDays);
 		
 		int noOfDaysInt=0;
 		
@@ -106,25 +101,8 @@ public class EventController {
         ZonedDateTime now = ZonedDateTime.now();
 
 		ZonedDateTime currentDatePlus = now.plusHours(noOfDaysInt*24);
-		
-		System.out.println(currentDatePlus); 
 	
 		return eventService.findAllWithStartDateTimeOnOrBefore(currentDatePlus);
 	};
-	
-	
-//	Original below caused 
-//  EventService: deleteEvent failed: Http failure during parsing for http://localhost:4200/server/api/events/38
-//	// build delete employee REST API
-//	// http://localhost:8080/api/employees/1
-//	@DeleteMapping("{id}")
-//	public ResponseEntity<String> deleteEvent(@PathVariable("id") long id){
-//		
-//		// delete employee from DB
-//		eventService.deleteEvent(id);
-//		
-//		return new ResponseEntity<String>("Event deleted successfully!.", HttpStatus.OK);
-//	}
-	
-
+		
 }

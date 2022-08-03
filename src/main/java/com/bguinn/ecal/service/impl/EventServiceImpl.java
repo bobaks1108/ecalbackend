@@ -57,7 +57,6 @@ public class EventServiceImpl implements EventService {
 		existingEvent.setEndDate(event.getEndDate());
 		
 		// save existing Event
-		
 		eventRepository.save(existingEvent);
 			
 		return existingEvent;

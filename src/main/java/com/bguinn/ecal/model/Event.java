@@ -14,8 +14,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 
-//2:22 Spring Boot Youtube Tutorial
-
 @Data
 @Entity
 @Table(name="events")
@@ -107,8 +105,7 @@ public class Event {
 		} 
 		
 		private void validateEventObject(Event event) {
-			//Do some basic validations to check
-			//if user object does not break any assumption of system
+			// Do some basic validations to check - to do
 		}
 
 	}
