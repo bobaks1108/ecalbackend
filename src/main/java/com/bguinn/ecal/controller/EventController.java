@@ -28,7 +28,7 @@ import com.bguinn.ecal.model.Event;
 import com.bguinn.ecal.service.EventService;
 
 @RestController
-@CrossOrigin(origins="http://ecal-frontend.s3-website.eu-west-2.amazonaws.com")
+@CrossOrigin(origins = {"http://localhost:8080", "http://ecal-frontend.s3-website.eu-west-2.amazonaws.com"})
 @RequestMapping("/api/events")
 public class EventController {
 	
