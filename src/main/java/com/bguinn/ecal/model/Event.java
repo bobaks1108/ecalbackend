@@ -1,6 +1,6 @@
 package com.bguinn.ecal.model;
 
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -28,11 +28,11 @@ public class Event {
 	
 	@Column(name="start_date")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ssZZZZZ")
-	private ZonedDateTime startDate;
+	private OffsetDateTime startDate;
 	
 	@Column(name="end_date")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ssZZZZZ")
-	private ZonedDateTime endDate;
+	private OffsetDateTime endDate;
 	
     public Event() {
 		super();
@@ -60,19 +60,19 @@ public class Event {
 		this.eventName = eventName;
 	}
 
-	public ZonedDateTime getStartDate() {
+	public OffsetDateTime getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(ZonedDateTime startDate) {
+	public void setStartDate(OffsetDateTime startDate) {
 		this.startDate = startDate;
 	}
 
-	public ZonedDateTime getEndDate() {
+	public OffsetDateTime getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(ZonedDateTime endDate) {
+	public void setEndDate(OffsetDateTime endDate) {
 		this.endDate = endDate;
 	}
 
@@ -80,19 +80,19 @@ public class Event {
 	public static class EventBuilder
 	{
 		private String eventName;
-		private ZonedDateTime startDate;
-		private ZonedDateTime endDate;
+		private OffsetDateTime startDate;
+		private OffsetDateTime endDate;
 
 		public EventBuilder(String eventName) {
 			this.eventName = eventName;
 		}
 		
-		public EventBuilder startDate(ZonedDateTime startDate) {
+		public EventBuilder startDate(OffsetDateTime startDate) {
 			this.startDate = startDate;
 			return this;
 		}
 		
-		public EventBuilder endDate(ZonedDateTime endDate) {
+		public EventBuilder endDate(OffsetDateTime endDate) {
 			this.endDate = endDate;
 			return this;
 		}

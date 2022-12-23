@@ -2,7 +2,7 @@ package com.bguinn.ecal.controller;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,7 +28,7 @@ import com.bguinn.ecal.model.Event;
 import com.bguinn.ecal.service.EventService;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:8080", "http://ecal-frontend.s3-website.eu-west-2.amazonaws.com"})
+@CrossOrigin(origins = {"http://localhost:4200", "http://ecal-frontend.s3-website.eu-west-2.amazonaws.com"})
 @RequestMapping("/api/events")
 public class EventController {
 	
@@ -98,9 +98,9 @@ public class EventController {
             ex.printStackTrace();
         }
 
-        ZonedDateTime now = ZonedDateTime.now();
+        OffsetDateTime now = OffsetDateTime.now();
 
-		ZonedDateTime currentDatePlus = now.plusHours(noOfDaysInt*24);
+		OffsetDateTime currentDatePlus = now.plusHours(noOfDaysInt*24);
 	
 		return eventService.findAllWithStartDateTimeOnOrBefore(currentDatePlus);
 	};

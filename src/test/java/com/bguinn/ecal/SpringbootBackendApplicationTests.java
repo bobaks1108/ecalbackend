@@ -13,7 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
@@ -55,19 +55,19 @@ class SpringbootBackendApplicationTests {
     
     private Event createEventPlusDays(String eventName, int noOfDaysToAddOrMinus) {
 	   
-	   LocalDateTime now = LocalDateTime.now();
+	  OffsetDateTime now = OffsetDateTime.now();
 	   
        String dateTimeFormat = "yyyy-MM-dd'T'HH:mm:ss";
-	   
-	   LocalDateTime currentDatePlusOrMinusDays = now.plusHours(noOfDaysToAddOrMinus*24);
-	   
-       LocalDateTime currentDatePlusOrMinusDaysLdt = LocalDateTime.parse(currentDatePlusOrMinusDays.truncatedTo(ChronoUnit.SECONDS).toString(), DateTimeFormatter.ofPattern(dateTimeFormat));
+
+		OffsetDateTime currentDatePlusOrMinusDays = now.plusHours(noOfDaysToAddOrMinus*24);
+
+		//OffsetDateTime currentDatePlusOrMinusDaysLdt = OffsetDateTime.parse(currentDatePlusOrMinusDays.truncatedTo(ChronoUnit.SECONDS).toString(), DateTimeFormatter.ofPattern(dateTimeFormat));
        
-       ZonedDateTime dateZdt = currentDatePlusOrMinusDaysLdt.atZone(ZoneOffset.UTC);
+       //OffsetDateTime dateZdt = currentDatePlusOrMinusDaysLdt.atZone(ZoneOffset.UTC);
        
        Event event = new Event.EventBuilder(eventName)
-               .startDate(dateZdt)
-               .endDate(dateZdt)
+               .startDate(currentDatePlusOrMinusDays)
+               .endDate(currentDatePlusOrMinusDays)
                .build();
 
        return event;
@@ -163,18 +163,18 @@ class SpringbootBackendApplicationTests {
 		ResultActions response2 = getResponseFromAddingEvent(event2);
 		ResultActions response3 = getResponseFromAddingEvent(event3);
 		
-	   LocalDateTime now = LocalDateTime.now();
+	   OffsetDateTime now = OffsetDateTime.now();
 	   
        String dateTimeFormat = "yyyy-MM-dd'T'HH:mm:ss";
-	   
-	   LocalDateTime currentDatePlusDays = now.plusHours(daysInToFutureForDateToCheckBefore*24);
-	   
-       LocalDateTime currentDatePlusDaysLdt = LocalDateTime.parse(currentDatePlusDays.truncatedTo(ChronoUnit.SECONDS).toString(), DateTimeFormatter.ofPattern(dateTimeFormat));
+
+		OffsetDateTime currentDatePlusDays = now.plusHours(daysInToFutureForDateToCheckBefore*24);
+
+		//OffsetDateTime currentDatePlusDaysLdt = OffsetDateTime.parse(currentDatePlusDays.truncatedTo(ChronoUnit.SECONDS).toString(), DateTimeFormatter.ofPattern(dateTimeFormat));
        
-       ZonedDateTime dateZdt = currentDatePlusDaysLdt.atZone(ZoneOffset.UTC);
+       //OffsetDateTime dateZdt = currentDatePlusDaysLdt.atZone(ZoneOffset.UTC);
         
         List<Event> result = eventService.findAllWithStartDateTimeOnOrBefore(
-        		dateZdt);
+				currentDatePlusDays);
 
         assertEquals(1, result.size());
         

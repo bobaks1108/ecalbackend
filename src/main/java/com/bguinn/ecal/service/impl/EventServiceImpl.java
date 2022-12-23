@@ -1,7 +1,7 @@
 package com.bguinn.ecal.service.impl;
 
 import java.text.SimpleDateFormat;
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -82,7 +82,7 @@ public class EventServiceImpl implements EventService {
 
 
 	@Override
-	public List<Event> findAllWithStartDateTimeOnOrBefore(ZonedDateTime parse) {
+	public List<Event> findAllWithStartDateTimeOnOrBefore(OffsetDateTime parse) {
 		return eventRepository.findAllWithStartDateTimeOnOrBefore(parse);
 	}
 	
