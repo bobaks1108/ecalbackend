@@ -130,9 +130,9 @@ class SpringbootBackendApplicationTests {
         .andExpect(jsonPath("$.eventName",
                 is(event.getEventName())))
         .andExpect(jsonPath("$.startDate",
-                is(event.getStartDate().truncatedTo(ChronoUnit.SECONDS).toString())))
+                is(event.getStartDate().toInstant().atOffset(ZoneOffset.UTC).truncatedTo(ChronoUnit.SECONDS).toString())))
         .andExpect(jsonPath("$.endDate",
-                is(event.getEndDate().truncatedTo(ChronoUnit.SECONDS).toString())));
+                is(event.getEndDate().toInstant().atOffset(ZoneOffset.UTC).truncatedTo(ChronoUnit.SECONDS).toString())));
 
 	}
 	
