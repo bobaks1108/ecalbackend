@@ -13,7 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -124,11 +124,11 @@ class SpringbootBackendApplicationTests {
         ResultActions response2 = getResponseFromAddingEvent(event2);
         ResultActions response3 = getResponseFromAddingEvent(event3);
 
-        OffsetDateTime now = OffsetDateTime.now();
+        LocalDate now = LocalDate.now();
 
-        String dateTimeFormat = "yyyy-MM-dd'T'HH:mm:ss";
+        String dateTimeFormat = "yyyy-MM-dd";
 
-        OffsetDateTime currentDatePlusDays = now.plusHours(daysInToFutureForDateToCheckBefore * 24);
+        LocalDate currentDatePlusDays = now.plusDays(daysInToFutureForDateToCheckBefore);
 
 
         List<Event> result = eventService.findAllWithStartDateTimeOnOrBefore(
@@ -182,11 +182,9 @@ class SpringbootBackendApplicationTests {
 
     private Event createEventPlusDays(String eventName, int noOfDaysToAddOrMinus) {
 
-        OffsetDateTime now = OffsetDateTime.now();
+        LocalDate today = LocalDate.now();
 
-        String dateTimeFormat = "yyyy-MM-dd'T'HH:mm:ss";
-
-        OffsetDateTime currentDatePlusOrMinusDays = now.plusHours(noOfDaysToAddOrMinus * 24);
+        LocalDate currentDatePlusOrMinusDays = today.plusDays(noOfDaysToAddOrMinus);
 
         Event event = new Event.EventBuilder(eventName)
                 .startDate(currentDatePlusOrMinusDays)

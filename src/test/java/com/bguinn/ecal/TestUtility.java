@@ -12,7 +12,7 @@ public class TestUtility {
     private static final String DB_URL = "jdbc:hsqldb:eventsTestDB;shutdown=true";
     private static final String DB_USERNAME = "sa";
     private static final String SQL_CHANGE_PASSWORD = "ALTER USER sa SET PASSWORD 'Pa55word'";
-    private static final String SQL_CREATE_TABLE_EVENTS = "DROP SCHEMA PUBLIC CASCADE; CREATE TABLE EVENTS (id BIGINT NOT NULL, name VARCHAR(255), start_date DATETIME, end_date DATETIME, PRIMARY KEY (id))";
+    private static final String SQL_CREATE_TABLE_EVENTS = "DROP SCHEMA PUBLIC CASCADE; CREATE TABLE EVENTS (id BIGINT NOT NULL, name VARCHAR(255), start_date DATE, end_date DATE, PRIMARY KEY (id))";
 
     public static void initialiseDatabase() {
 
